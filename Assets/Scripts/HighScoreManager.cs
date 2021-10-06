@@ -6,16 +6,25 @@ using System.IO;
 
 public class HighScoreManager : MonoBehaviour
 {
+    public static HighScoreManager Instance;
     public ListContainer nameScore;
     public Text nameList;
     public Text scoreList;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        if(Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(this);
+
         LoadHighScores();
         UpdateList();
-        SaveHighScores();
     }
 
     [System.Serializable]
@@ -98,5 +107,14 @@ public class HighScoreManager : MonoBehaviour
             nameScore.tempBS.Add(new NameScoreParings("Danimal", 10));
             nameScore.tempBS.Sort(ComparePairings);
         }
-    }    
+    }
+
+    public void AddScore(string name, int score)
+    {
+        nameScore.tempBS.Add(new NameScoreParings(name, score));
+        nameScore.tempBS.Sort(ComparePairings);
+        nameScore.tempBS.RemoveAt(9);
+        UpdateList();
+        
+    }
 }
