@@ -759,7 +759,11 @@ MonoBehaviour:
   LineCount: 6
   Ball: {fileID: 177912862}
   ScoreText: {fileID: 188020406}
-  inputFeild: {fileID: 0}
+  inputFeild: {fileID: 2086064600}
+  gameElements:
+  - {fileID: 1066359099}
+  - {fileID: 1550576932}
+  - {fileID: 97436041}
 --- !u!1 &455529321
 GameObject:
   m_ObjectHideFlags: 0

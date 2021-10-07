@@ -12,6 +12,7 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
     public GameObject inputFeild;
+    public List<GameObject> gameElements;
     
     private bool m_Started = false;
     private int m_Points;
@@ -70,6 +71,14 @@ public class MainManager : MonoBehaviour
         ScoreText.text = $"Score : {m_Points}";
     }
 
+    void TurnEverythingOff()
+    {
+        for (int i = 0; i < gameElements.Count; i++)
+        {
+            gameElements[i].SetActive(false);
+        }
+    }
+
     public void GameOver()
     {
         m_GameOver = true;
@@ -78,6 +87,7 @@ public class MainManager : MonoBehaviour
 
     public void ReadInput(string name)
     {
+        TurnEverythingOff();
         HighScoreManager.Instance.gameObject.SetActive(true);
         HighScoreManager.Instance.AddScore(name, m_Points);
         HighScoreManager.Instance.SaveHighScores();
